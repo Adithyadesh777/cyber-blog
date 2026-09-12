@@ -1,6 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-cyber-bg: #080c14;
+  --color-cyber-card: #0d1424;
+  --color-cyber-border: #1e293b;
+  --color-cyber-cyan: #00f0ff;
+  --color-cyber-emerald: #00ff9d;
+  --color-cyber-muted: #94a3b8;
+}
 
 :root {
   color-scheme: dark;
@@ -13,7 +20,7 @@ body {
   min-height: 100vh;
 }
 
-/* Subtle background telemetry grid pattern */
+/* Background telemetry grid */
 .cyber-grid {
   background-image:
     linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
