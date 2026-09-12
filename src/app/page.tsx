@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TelemetryMetrics from "@/components/TelemetryMetrics";
+import FeaturedArticles from "@/components/FeaturedArticles";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <main className="flex-1 pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center">
         <Hero />
         <TelemetryMetrics />
+        <FeaturedArticles />
       </main>
     </div>
   );
