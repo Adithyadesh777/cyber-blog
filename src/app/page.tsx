@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import TelemetryMetrics from "@/components/TelemetryMetrics";
 import FeaturedArticles from "@/components/FeaturedArticles";
 import AILabShowcase from "@/components/AILabShowcase";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -17,6 +18,9 @@ export default function Home() {
         <FeaturedArticles />
         <AILabShowcase />
       </main>
+
+      {/* HUD Telemetry Footer */}
+      <Footer />
     </div>
   );
 }
