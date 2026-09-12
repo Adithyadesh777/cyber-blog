@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import TelemetryMetrics from "@/components/TelemetryMetrics";
 
 export default function Home() {
   return (
@@ -8,8 +9,9 @@ export default function Home() {
       <Navbar />
 
       {/* Main Content Area */}
-      <main className="flex-1 pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center justify-center">
+      <main className="flex-1 pt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col items-center">
         <Hero />
+        <TelemetryMetrics />
       </main>
     </div>
   );
