@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import TelemetryMetrics from "@/components/TelemetryMetrics";
 import FeaturedArticles from "@/components/FeaturedArticles";
+import AILabShowcase from "@/components/AILabShowcase";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Hero />
         <TelemetryMetrics />
         <FeaturedArticles />
+        <AILabShowcase />
       </main>
     </div>
   );
