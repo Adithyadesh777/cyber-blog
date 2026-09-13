@@ -1,29 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --color-cyber-bg: #080c14;
-  --color-cyber-card: #0d1424;
+  --color-cyber-bg: #030712;
+  --color-cyber-card: #0b1329;
   --color-cyber-border: #1e293b;
-  --color-cyber-cyan: #00f0ff;
-  --color-cyber-emerald: #00ff9d;
+  --color-cyber-cyan: #06b6d4;
+  --color-cyber-emerald: #10b981;
   --color-cyber-muted: #94a3b8;
+
+  --font-mono: var(--font-space-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-:root {
-  color-scheme: dark;
-}
-
-body {
-  background-color: #080c14;
-  color: #ffffff;
-  overflow-x: hidden;
-  min-height: 100vh;
-}
-
-/* Background telemetry grid */
+/* Background Cyber Grid Matrix */
 .cyber-grid {
   background-image:
-    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(30, 41, 59, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30, 41, 59, 0.25) 1px, transparent 1px);
   background-size: 40px 40px;
+}
+
+/* Custom Scrollbar for Terminal HUD */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030712;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
 }
