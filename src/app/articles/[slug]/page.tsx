@@ -2,7 +2,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { articles } from "@/data/articles";
+import { getArticleBySlug } from "@/lib/mdx";
+import { mdxComponents } from "@/components/MdxComponents";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { ArrowLeft, Clock, Tag } from "lucide-react";
 
 interface PageProps {
@@ -11,21 +13,22 @@ interface PageProps {
 
 export default async function ArticleDossier({ params }: PageProps) {
     const { slug } = await params;
-    const article = articles.find((a) => a.slug === slug);
+    const article = getArticleBySlug(slug);
 
     if (!article) {
         notFound();
     }
 
-    const isCritical = article.severity === "CRITICAL";
-    const isHigh = article.severity === "HIGH";
+    const { meta, content } = article;
+    const isCritical = meta.severity === "CRITICAL";
+    const isHigh = meta.severity === "HIGH";
 
     return (
         <div className="min-h-screen bg-cyber-bg cyber-grid text-white flex flex-col">
             <Navbar />
 
             <main className="flex-1 pt-28 pb-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                {/* Return Navigation */}
+                {/* Return Link */}
                 <Link
                     href="/#articles"
                     className="inline-flex items-center gap-2 text-xs font-mono text-cyber-muted hover:text-cyber-cyan transition-colors mb-8 group"
@@ -39,13 +42,13 @@ export default async function ArticleDossier({ params }: PageProps) {
                     <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                         <span className="inline-flex items-center gap-1.5 text-xs font-mono text-cyber-muted uppercase">
                             <Tag className="w-3.5 h-3.5 text-cyber-cyan" />
-                            {article.category}
+                            {meta.category}
                         </span>
 
                         <div className="flex items-center gap-3">
-                            {article.cveRef && (
+                            {meta.cveRef && (
                                 <span className="text-xs font-mono text-cyber-cyan bg-cyber-card border border-cyber-cyan/30 px-2 py-0.5 rounded">
-                                    {article.cveRef}
+                                    {meta.cveRef}
                                 </span>
                             )}
                             <span
@@ -56,35 +59,30 @@ export default async function ArticleDossier({ params }: PageProps) {
                                             : "text-cyber-cyan border-cyber-cyan/40 bg-cyber-cyan/10"
                                     }`}
                             >
-                                {article.severity}
+                                {meta.severity}
                             </span>
                         </div>
                     </div>
 
                     <h1 className="text-2xl sm:text-4xl font-bold font-mono text-white mb-4 leading-snug">
-                        {article.title}
+                        {meta.title}
                     </h1>
 
                     <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-cyber-muted pt-4 border-t border-cyber-border/50">
-                        <span>ANALYST: {article.author}</span>
+                        <span>ANALYST: {meta.author}</span>
                         <span>•</span>
-                        <span>DATE: {article.date}</span>
+                        <span>DATE: {meta.date}</span>
                         <span>•</span>
                         <span className="flex items-center gap-1">
                             <Clock className="w-3.5 h-3.5" />
-                            {article.readTime}
+                            {meta.readTime}
                         </span>
                     </div>
                 </header>
 
-                {/* Content Body */}
-                <article className="space-y-6 font-mono text-gray-300 leading-relaxed text-sm sm:text-base">
-                    {article.content.map((paragraph, idx) => (
-                        <p key={idx} className="p-4 rounded bg-cyber-card/40 border border-cyber-border/40">
-                            <span className="text-cyber-cyan mr-2 select-none">&gt;&gt;</span>
-                            {paragraph}
-                        </p>
-                    ))}
+                {/* Rendered MDX Content */}
+                <article className="border border-cyber-border/60 rounded-lg bg-cyber-card/40 p-6 sm:p-8 backdrop-blur-sm">
+                    <MDXRemote source={content} components={mdxComponents} />
                 </article>
             </main>
 
